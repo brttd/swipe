@@ -294,25 +294,41 @@ function getStoryElem() {
 document.body.appendChild(getStoryElem())
 goFullScreen()
 
+var nextStory = getStoryElem()
+//Preload second story
+nextStory.style.top = '150%'
+document.body.appendChild(nextStory)
+requestAnimationFrame(function() {
+    document.body.removeChild(nextStory)
+})
+
 function showNext() {
     goFullScreen()
 
     document.body.firstElementChild.style.zIndex = '1'
 
-    let newElem = getStoryElem()
-    newElem.style.top = '100%'
-    newElem.style.zIndex = '2'
+    nextStory.style.top = '100%'
+    nextStory.style.zIndex = '2'
 
     requestAnimationFrame(function() {
-        document.body.appendChild(newElem)
+        document.body.appendChild(nextStory)
 
         infoText = null
 
         requestAnimationFrame(function() {
-            newElem.style.top = '0'
+            nextStory.style.top = '0'
 
             setTimeout(function() {
                 document.body.removeChild(document.body.firstElementChild)
+
+                nextStory = getStoryElem()
+
+                //Preload images for next story, without showing the story
+                nextStory.style.top = '150%'
+                document.body.appendChild(nextStory)
+                requestAnimationFrame(function() {
+                    document.body.removeChild(nextStory)
+                })
             }, transitionTime * 1000)
         })
     })
