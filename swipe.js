@@ -361,4 +361,4 @@ function showInfo() {
     document.body.firstElementChild.appendChild(infoText)
 }
 
-showInfo()
+//showInfo()
