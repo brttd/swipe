@@ -291,17 +291,6 @@ function getStoryElem() {
     return elem
 }
 
-document.body.appendChild(getStoryElem())
-goFullScreen()
-
-var nextStory = getStoryElem()
-//Preload second story
-nextStory.style.top = '150%'
-document.body.appendChild(nextStory)
-requestAnimationFrame(function() {
-    document.body.removeChild(nextStory)
-})
-
 function showNext() {
     goFullScreen()
 
@@ -396,4 +385,13 @@ document.body.addEventListener('touchend', function(touch) {
     }
 })
 
-//showInfo()
+document.body.appendChild(getStoryElem())
+goFullScreen()
+
+var nextStory = getStoryElem()
+//Preload second story
+nextStory.style.top = '150%'
+document.body.appendChild(nextStory)
+requestAnimationFrame(function() {
+    document.body.removeChild(nextStory)
+})
