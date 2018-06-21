@@ -188,9 +188,7 @@ function getStoryElem() {
             ',' +
             searchTerms[Math.floor(Math.random() * searchTerms.length)]
 
-        if (Math.random() > 0.5) {
-            elem.appendChild(getUrlText('https://source.unsplash.com', true))
-        }
+        elem.appendChild(getUrlText('https://source.unsplash.com', true))
     } else if (Math.random() > 0.7) {
         let imageURL = images[Math.floor(Math.random() * images.length)]
 
@@ -204,7 +202,7 @@ function getStoryElem() {
         elem.appendChild(document.createElement('img'))
         elem.firstChild.src = imageURL
 
-        if (Math.random() > 0.7) {
+        if (!imageURL.includes('brettdoyle.uk')) {
             elem.appendChild(getUrlText(imageURL, true))
         }
     } else {
