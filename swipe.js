@@ -375,4 +375,25 @@ function showInfo() {
     document.body.firstElementChild.appendChild(infoText)
 }
 
+var touchHeight = false
+var touchCount = 0
+document.body.addEventListener('touchstart', function(touch) {
+    if (!touchHeight) {
+        touchHeight = touch.touches[0].screenY
+    }
+
+    touchCount += 1
+})
+document.body.addEventListener('touchend', function(touch) {
+    if (touch.changedTouches[0].screenY < touchHeight) {
+        showNext()
+    }
+
+    touchCount -= 1
+
+    if (touchCount === 0) {
+        touchHeight = false
+    }
+})
+
 //showInfo()
