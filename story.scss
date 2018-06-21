@@ -194,7 +194,7 @@ body {
             @for $count from 1 through 15 {
                 &.count_#{$count} {
                     .bar {
-                        width: calc(#{100% / $count} - 0.4rem);
+                        width: calc(#{100% / $count} - 0.2em);
                     }
                 }
             }
