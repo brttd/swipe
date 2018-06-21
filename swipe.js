@@ -73,7 +73,7 @@ var images = [
     'http://brettdoyle.uk/images/wallpapers/ClothMonochrome_1.png',
     'http://brettdoyle.uk/images/wallpapers/BML_Traffic_2.png',
     'http://brettdoyle.uk/images/wallpapers/BML_Traffic_1.png',
-    'http://brettdoyle.uk/images/wallpapers/BedlamCube_2.png',
+    //'http://brettdoyle.uk/images/wallpapers/BedlamCube_2.png',
 
     'https://bukk.it/a-moment.gif'
 ]
