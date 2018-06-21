@@ -112,8 +112,6 @@ var activeScreen = 1
 var transitionTime = 1
 
 function goFullScreen() {
-    return
-
     if (document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen()
     } else if (document.documentElement.webkitRequestFullScreen) {
