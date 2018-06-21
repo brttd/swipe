@@ -3,7 +3,7 @@ document.body.removeChild(document.body.firstChild)
 
 var options = {
     profile: {
-        img: '_brettd.jpg',
+        img: 'profile.png',
         name: '_brettd'
     }
 }
