@@ -301,6 +301,8 @@ function showNext() {
 
     document.body.firstElementChild.style.zIndex = '1'
 
+    let nextStory = getStoryElem()
+
     nextStory.style.top = '100%'
     nextStory.style.zIndex = '2'
 
@@ -313,16 +315,9 @@ function showNext() {
             nextStory.style.top = '0'
 
             setTimeout(function() {
-                document.body.removeChild(document.body.firstElementChild)
-
-                nextStory = getStoryElem()
-
-                //Preload images for next story, without showing the story
-                nextStory.style.top = '150%'
-                document.body.appendChild(nextStory)
-                requestAnimationFrame(function() {
-                    document.body.removeChild(nextStory)
-                })
+                if (document.body.childElementCount > 1) {
+                    document.body.removeChild(document.body.firstElementChild)
+                }
             }, transitionTime * 1000)
         })
     })
@@ -392,11 +387,3 @@ document.body.addEventListener('touchend', function(touch) {
 
 document.body.appendChild(getStoryElem())
 goFullScreen()
-
-var nextStory = getStoryElem()
-//Preload second story
-nextStory.style.top = '150%'
-document.body.appendChild(nextStory)
-requestAnimationFrame(function() {
-    document.body.removeChild(nextStory)
-})
