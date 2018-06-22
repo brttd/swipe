@@ -1,15 +1,46 @@
 document.body.removeChild(document.body.firstChild)
 document.body.removeChild(document.body.firstChild)
 
-var options = {
+const options = {
     profile: {
         img: 'profile.png',
         name: '_brettd'
-    }
+    },
+
+    timeUnits: ['s', 'm', 'h', 'd', 'y'],
+
+    percentages: {
+        unsplash: 25,
+        image: 25,
+        url: 50
+    },
+
+    transitionTime: 1,
+
+    urlAttributeText: [
+        'From',
+        'from:',
+        'courtesy of',
+        'courtesy of:',
+        'by',
+        'By:',
+        'url:',
+        'URL:'
+    ],
+    imageAttributeText: [
+        'Image is from',
+        'Image from',
+        'image from:',
+        'Image:',
+        'From:',
+        'url:',
+        ''
+    ],
+    textMargin: 20,
+    textMaxCharsPerLine: 15
 }
-var timeUnits = ['s', 'm', 'h', 'd', 'y']
-var searchTerms = 'abcdefghijklmnopqrstuvwxyz'.split('')
-var urls = [
+const unsplashSearchTerms = 'abcdefghijklmnopqrstuvwxyz'.split('')
+const urls = [
     //'http://www.buttercupfestival.com/2-3.htm',
     //'http://www.buttercupfestival.com/2-4.htm',
     //'http://www.buttercupfestival.com/2-5.htm',
@@ -67,7 +98,7 @@ var urls = [
     'https://codepen.io/tmrDevelops/full/KzbPyv',
     'https://codepen.io/timseverien/full/EKdOpy'
 ]
-var images = [
+const images = [
     //'http://brettdoyle.uk/images/wallpapers/Stripes_1.png',
     'http://brettdoyle.uk/images/wallpapers/IsoPixelGrid_1.png',
     //'http://brettdoyle.uk/images/wallpapers/Elevators_1.png',
@@ -85,38 +116,13 @@ var images = [
     'http://www.simonstalenhag.se/bilderbig/summerlove2_1920.jpg'
 ]
 
-var usedURLS = []
-var usedImages = []
+const usedURLS = []
+const usedImages = []
 
-var urlAttributeText = [
-    'From',
-    'from:',
-    'courtesy of',
-    'courtesy of:',
-    'by',
-    'By:',
-    'url:',
-    'URL:'
-]
-var imageAttributeText = [
-    'Image is from',
-    'Image from',
-    'image from:',
-    'Image:',
-    'From:',
-    'url:',
-    ''
-]
-var textBounds = 20
-var maxCharsPerLine = 15
+let infoText = null
 
-var infoText = null
-
-userWidth = 555
-userHeight = 987
-
-var activeScreen = 1
-var transitionTime = 1
+let touchHeight = false
+let touchCount = 0
 
 function goFullScreen() {
     if (document.documentElement.requestFullscreen) {
@@ -132,10 +138,14 @@ function goFullScreen() {
 
 function addTextLines(elem, text) {
     let index = 0
+
     while (index < text.length) {
         elem.appendChild(document.createElement('span'))
-        elem.lastChild.textContent = text.slice(index, index + maxCharsPerLine)
-        index += maxCharsPerLine
+        elem.lastChild.textContent = text.slice(
+            index,
+            index + options.textMaxCharsPerLine
+        )
+        index += options.textMaxCharsPerLine
     }
 
     return elem
@@ -146,9 +156,15 @@ function getUrlText(url, image = false) {
     elem.className = 'text'
 
     elem.style.top =
-        (Math.random() * (100 - textBounds * 2) + textBounds).toString() + '%'
+        (
+            Math.random() * (100 - options.textMargin * 2) +
+            options.textMargin
+        ).toString() + '%'
     elem.style.left =
-        (Math.random() * (100 - textBounds * 2) + textBounds).toString() + '%'
+        (
+            Math.random() * (100 - options.textMargin * 2) +
+            options.textMargin
+        ).toString() + '%'
 
     elem.style.fontSize = (Math.random() * 23 + 12).toString() + 'px'
 
@@ -165,14 +181,14 @@ function getUrlText(url, image = false) {
     if (image) {
         elem.appendChild(document.createElement('span'))
         elem.lastChild.textContent =
-            imageAttributeText[
-                Math.floor(Math.random() * imageAttributeText.length)
+            options.imageAttributeText[
+                Math.floor(Math.random() * options.imageAttributeText.length)
             ]
     } else {
         elem.appendChild(document.createElement('span'))
         elem.lastChild.textContent =
-            urlAttributeText[
-                Math.floor(Math.random() * urlAttributeText.length)
+            options.urlAttributeText[
+                Math.floor(Math.random() * options.urlAttributeText.length)
             ]
     }
 
@@ -182,21 +198,32 @@ function getUrlText(url, image = false) {
 }
 
 function getStoryElem() {
-    var elem = document.createElement('div')
+    let elem = document.createElement('div')
     elem.className = 'screen'
 
-    if (Math.random() > 0.7) {
+    let perc = Math.random() * 100
+
+    if (perc < options.percentages.unsplash) {
         elem.appendChild(document.createElement('img'))
         elem.firstChild.src =
             'https://source.unsplash.com/featured?' +
-            searchTerms[Math.floor(Math.random() * searchTerms.length)] +
+            unsplashSearchTerms[
+                Math.floor(Math.random() * unsplashSearchTerms.length)
+            ] +
             ',' +
-            searchTerms[Math.floor(Math.random() * searchTerms.length)] +
+            unsplashSearchTerms[
+                Math.floor(Math.random() * unsplashSearchTerms.length)
+            ] +
             ',' +
-            searchTerms[Math.floor(Math.random() * searchTerms.length)]
+            unsplashSearchTerms[
+                Math.floor(Math.random() * unsplashSearchTerms.length)
+            ]
 
         elem.appendChild(getUrlText('https://source.unsplash.com', true))
-    } else if (Math.random() > 0.7) {
+    } else if (
+        perc <
+        options.percentages.unsplash + options.percentages.image
+    ) {
         let imageURL = images[Math.floor(Math.random() * images.length)]
 
         usedImages.push(imageURL)
@@ -264,7 +291,7 @@ function getStoryElem() {
     header.lastChild.lastChild.className = 'time'
     header.lastChild.lastChild.textContent =
         Math.floor(Math.random() * 24).toString() +
-        timeUnits[Math.floor(Math.random() * timeUnits.length)]
+        options.timeUnits[Math.floor(Math.random() * options.timeUnits.length)]
 
     elem.appendChild(header)
 
@@ -287,7 +314,7 @@ function getStoryElem() {
     footer.lastChild.className = 'menu'
 
     elem.appendChild(footer)
-    elem.style.transition = 'top ' + transitionTime.toString() + 's'
+    elem.style.transition = 'top ' + options.transitionTime.toString() + 's'
 
     footer.firstChild.addEventListener('click', showNext)
     footer.lastChild.addEventListener('click', showInfo)
@@ -318,7 +345,7 @@ function showNext() {
                 if (document.body.childElementCount > 1) {
                     document.body.removeChild(document.body.firstElementChild)
                 }
-            }, transitionTime * 1000)
+            }, options.transitionTime * 1000)
         })
     })
 }
@@ -326,6 +353,7 @@ function showInfo() {
     if (infoText) {
         infoText.parentNode.removeChild(infoText)
     }
+
     infoText = document.createElement('div')
     infoText.className = 'text'
 
@@ -364,8 +392,6 @@ function showInfo() {
     document.body.firstElementChild.appendChild(infoText)
 }
 
-var touchHeight = false
-var touchCount = 0
 document.body.addEventListener('touchstart', function(touch) {
     if (!touchHeight) {
         touchHeight = touch.touches[0].screenY
