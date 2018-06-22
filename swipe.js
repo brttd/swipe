@@ -19,6 +19,7 @@ var urls = [
     //'http://www.buttercupfestival.com/2-134.htm',
     //'http://www.buttercupfestival.com/2-140.htm',
 
+    'http://www.therestartpage.com/',
     'http://chrismckenzie.com',
     'http://iridescentpuddle.com',
     'http://www.fallingfalling.com',
@@ -29,6 +30,8 @@ var urls = [
     'https://pixlpa.com/crust-map',
     'https://pixlpa.com/webgl/hills.html',
     'http://www.earthglance.com/random',
+    'http://ezramiller.biz/projects/growth-activator/',
+    'http://myshards.com/',
 
     'https://www.youtube.com/embed/-VQyP-7wMyA',
     'https://www.youtube.com/embed/bjQhthEL-Zo',
@@ -75,7 +78,11 @@ var images = [
     'http://brettdoyle.uk/images/wallpapers/BML_Traffic_1.png',
     //'http://brettdoyle.uk/images/wallpapers/BedlamCube_2.png',
 
-    'https://bukk.it/a-moment.gif'
+    'https://bukk.it/a-moment.gif',
+
+    'http://www.simonstalenhag.se/bilderbig/by_warmachines7_1920.jpg',
+    'http://www.simonstalenhag.se/bilderbig/bostadsmauer_1920.jpg',
+    'http://www.simonstalenhag.se/bilderbig/summerlove2_1920.jpg'
 ]
 
 var usedURLS = []
