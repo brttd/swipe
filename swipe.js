@@ -74,8 +74,8 @@ const urls = [
     //'https://apod.nasa.gov/apod/',
     //'http://www.zentient.com/site/experiments/blox.html',
 
-    'http://brettdoyle.uk/www/lines.html',
-    'http://brettdoyle.uk/www/arches.html',
+    'http://wwww.brettdoyle.art/lines.html',
+    'http://wwww.brettdoyle.art/arches.html',
 
     //'https://codepen.io/brttd/full/xWrMJv/',
     'https://codepen.io/brttd/full/dWNQWo',
@@ -100,13 +100,13 @@ const urls = [
 ]
 const images = [
     //'http://brettdoyle.uk/images/wallpapers/Stripes_1.png',
-    'http://brettdoyle.uk/images/wallpapers/IsoPixelGrid_1.png',
+    //'http://brettdoyle.uk/images/wallpapers/IsoPixelGrid_1.png',
     //'http://brettdoyle.uk/images/wallpapers/Elevators_1.png',
-    'http://brettdoyle.uk/images/wallpapers/DelaunayTriangulationCircumCircle_1.png',
-    'http://brettdoyle.uk/images/wallpapers/CubeSpiral_1.png',
-    'http://brettdoyle.uk/images/wallpapers/ClothMonochrome_1.png',
-    'http://brettdoyle.uk/images/wallpapers/BML_Traffic_2.png',
-    'http://brettdoyle.uk/images/wallpapers/BML_Traffic_1.png',
+    //'http://brettdoyle.uk/images/wallpapers/DelaunayTriangulationCircumCircle_1.png',
+    //'http://brettdoyle.uk/images/wallpapers/CubeSpiral_1.png',
+    //'http://brettdoyle.uk/images/wallpapers/ClothMonochrome_1.png',
+    //'http://brettdoyle.uk/images/wallpapers/BML_Traffic_2.png',
+    //'http://brettdoyle.uk/images/wallpapers/BML_Traffic_1.png',
     //'http://brettdoyle.uk/images/wallpapers/BedlamCube_2.png',
 
     'https://bukk.it/a-moment.gif',
@@ -236,7 +236,7 @@ function getStoryElem() {
         elem.appendChild(document.createElement('img'))
         elem.firstChild.src = imageURL
 
-        if (!imageURL.includes('brettdoyle.uk')) {
+        if (!imageURL.includes('brettdoyle.art')) {
             elem.appendChild(getUrlText(imageURL, true))
         }
     } else {
@@ -369,7 +369,7 @@ function showInfo() {
     infoText.className += ' border'
 
     infoText.appendChild(document.createElement('span'))
-    infoText.lastChild.textContent = 'swipe.brettdoyle.uk'
+    infoText.lastChild.textContent = 'swipe.brettdoyle.art'
     infoText.appendChild(document.createElement('span'))
     infoText.lastChild.textContent = 'is a collection'
     infoText.appendChild(document.createElement('span'))
