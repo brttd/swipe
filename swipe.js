@@ -218,6 +218,17 @@ function goFullScreen() {
     }
 }
 
+function getExtraText() {
+    let text =
+        options.extraText[Math.floor(Math.random() * options.extraText.length)]
+
+    //35% of the time, make text uppercase
+    if (Math.random < 0.35) {
+        text = text.toUpperCase()
+    }
+
+    return text
+}
 function addTextLines(elem, text) {
     let index = 0
 
@@ -278,20 +289,48 @@ function getUrlText(url, image = false) {
 
     //60% of the time, add extra text
     if (Math.random() < 0.6) {
-        let text =
-            options.extraText[
-                Math.floor(Math.random() * options.extraText.length)
-            ]
-
         //20% of the time, show text below link
         if (Math.random() < 0.2) {
             elem.appendChild(document.createElement('span'))
-            elem.lastChild.textContent = text
+            elem.lastChild.textContent = getExtraText()
         } else {
             elem.insertBefore(document.createElement('span'), elem.firstChild)
-            elem.firstChild.textContent = text
+            elem.firstChild.textContent = getExtraText()
         }
     }
+
+    return elem
+}
+function getExtraTextElem() {
+    let elem = document.createElement('p')
+    elem.className = 'text'
+
+    elem.style.top =
+        (
+            Math.random() * (100 - options.textMargin * 2) +
+            options.textMargin
+        ).toString() + '%'
+    elem.style.left =
+        (
+            Math.random() * (100 - options.textMargin * 2) +
+            options.textMargin
+        ).toString() + '%'
+
+    elem.style.fontSize = (Math.random() * 23 + 12).toString() + 'px'
+
+    elem.style.transform =
+        'translate(-50%, -50%) rotate(' +
+        (Math.random() * 60 - 30).toString() +
+        'deg)'
+
+    elem.className += ' color_' + Math.floor(Math.random() * 8 + 1).toString()
+    if (Math.random() > 0.3) {
+        elem.className += ' border'
+    }
+
+    elem.appendChild(document.createElement('span'))
+
+    elem.lastChild.textContent = getExtraText()
 
     return elem
 }
@@ -318,6 +357,10 @@ function getStoryElem() {
                 Math.floor(Math.random() * unsplashSearchTerms.length)
             ]
 
+        if (Math.random() < 0.4) {
+            elem.appendChild(getExtraTextElem())
+        }
+
         elem.appendChild(getUrlText('https://source.unsplash.com', true))
     } else if (
         perc <
@@ -334,6 +377,10 @@ function getStoryElem() {
 
         elem.appendChild(document.createElement('img'))
         elem.firstChild.src = imageURL
+
+        if (Math.random() < 0.4) {
+            elem.appendChild(getExtraTextElem())
+        }
 
         if (!imageURL.includes('brettdoyle.art')) {
             elem.appendChild(getUrlText(imageURL, true))
@@ -354,6 +401,10 @@ function getStoryElem() {
         if (url.includes('codepen')) {
             elem.appendChild(document.createElement('div'))
             elem.lastChild.className = 'gradient'
+        }
+
+        if (Math.random() < 0.4) {
+            elem.appendChild(getExtraTextElem())
         }
 
         elem.appendChild(getUrlText(url))
