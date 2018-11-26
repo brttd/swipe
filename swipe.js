@@ -151,6 +151,9 @@ const urls = [
 
     'https://www.youtube.com/embed/-VQyP-7wMyA',
     'https://www.youtube.com/embed/bjQhthEL-Zo',
+    'https://www.youtube.com/embed/wx8ymV2pjsw',
+    'https://www.youtube.com/embed/ZIljQn1x7jw',
+    'https://www.youtube.com/embed/UN3uF3990Q0',
 
     //'http://www.generationlamp.com/lamp.php?lamp=brett',
     //'https://bukk.it/',
