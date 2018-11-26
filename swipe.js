@@ -19,23 +19,105 @@ const options = {
 
     urlAttributeText: [
         'From',
+        'From:',
         'from:',
         'courtesy of',
         'courtesy of:',
-        'by',
         'By:',
+        'by:',
+        'by',
+        'URL:',
         'url:',
-        'URL:'
+        'LINK:',
+        'Link:',
+        'link:'
     ],
     imageAttributeText: [
         'Image is from',
+        'image is from',
         'Image from',
         'image from:',
         'Image:',
+        'image:',
         'From:',
+        'from:',
+        'URL:',
         'url:',
-        ''
+        'Link:',
+        'link:'
     ],
+    extraText: [
+        'Amazing!',
+        'amazing',
+        'Cool!',
+        'cool',
+        'WOW',
+        'wow',
+
+        'wow 🤯',
+        'wow 😲',
+        'Wow 👍',
+        'wow 👏',
+        'WOW 💯',
+        'amazing 😍',
+        '✨AMAZING✨',
+        'Amazing 🎉',
+        'Amazing 💖',
+        'amazing 💯',
+        'so 🆒',
+
+        '😁😍',
+        '😃😍',
+        '🤯😲',
+        '👍👏',
+        '💯👍',
+        '🆒☑',
+
+        '😍',
+        '😍😍',
+        '😍😍😍',
+        '🙂',
+        '😁',
+        '😁😁',
+        '😃',
+        '😃😃',
+        '😎',
+        '🤯',
+        '🤯',
+        '😲',
+        '😲😲',
+        '😲😲😲',
+        '👍',
+        '👍👍',
+        '👍👍👍',
+        '👏',
+        '👏👏',
+        '👏👏👏',
+        '✨',
+        '🎉',
+        '✨🎉✨',
+        '🎨',
+        '❤',
+        '❤❤❤',
+        '🧡',
+        '🧡🧡',
+        '💛',
+        '💙',
+        '💚',
+        '💚💚',
+        '💜',
+        '🖤',
+        '💗',
+        '💖',
+        '💖💖',
+        '💖💖💖',
+        '💯',
+        '💯💯',
+        '🆒',
+        '🆒🆒',
+        '☑'
+    ],
+
     textMargin: 20,
     textMaxCharsPerLine: 15
 }
@@ -193,6 +275,23 @@ function getUrlText(url, image = false) {
     }
 
     addTextLines(elem, url.split('://')[1])
+
+    //60% of the time, add extra text
+    if (Math.random() < 0.6) {
+        let text =
+            options.extraText[
+                Math.floor(Math.random() * options.extraText.length)
+            ]
+
+        //20% of the time, show text below link
+        if (Math.random() < 0.2) {
+            elem.appendChild(document.createElement('span'))
+            elem.lastChild.textContent = text
+        } else {
+            elem.insertBefore(document.createElement('span'), elem.firstChild)
+            elem.firstChild.textContent = text
+        }
+    }
 
     return elem
 }
